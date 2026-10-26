@@ -195,11 +195,24 @@ chrome.storage.sync.get(['serverUrl'], (res) => {
   connectWebSocket(url);
 });
 
-// Listen for reconnection requests from the popup UI
+// Listen for messages from the popup UI
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === 'RECONNECT' && message.serverUrl) {
     connectWebSocket(message.serverUrl);
     sendResponse({ status: 'ok' });
+  } else if (message.type === 'GET_STATUS') {
+    let wsStatus = 'DISCONNECTED';
+    if (socket) {
+      if (socket.readyState === WebSocket.OPEN) wsStatus = 'CONNECTED';
+      else if (socket.readyState === WebSocket.CONNECTING) wsStatus = 'CONNECTING';
+    }
+
+    sendResponse({
+      injected: true,
+      videoFound: !!currentVideo,
+      wsState: wsStatus
+    });
   }
+  return true; // Keep channel open for async response
 });
 

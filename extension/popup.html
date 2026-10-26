@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      width: 280px;
+      width: 290px;
       padding: 16px;
       margin: 0;
       background: #141414;
@@ -20,10 +20,13 @@
       gap: 8px;
     }
     label {
-      font-size: 12px;
-      color: #aaa;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
       display: block;
       margin-bottom: 6px;
+      font-weight: 600;
     }
     input[type="text"] {
       width: 100%;
@@ -33,8 +36,8 @@
       border: 1px solid #333;
       background: #222;
       color: #fff;
-      font-size: 13px;
-      margin-bottom: 12px;
+      font-size: 12px;
+      margin-bottom: 10px;
     }
     input[type="text"]:focus {
       outline: none;
@@ -42,37 +45,119 @@
     }
     button {
       width: 100%;
-      padding: 9px;
+      padding: 8px;
       background: #00a8e8;
       color: #fff;
       border: none;
       border-radius: 4px;
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
       transition: background 0.2s;
     }
     button:hover {
       background: #0090c7;
     }
-    #status {
-      margin-top: 10px;
-      font-size: 12px;
-      text-align: center;
-      min-height: 18px;
+    
+    /* Diagnostics Card */
+    .diagnostics {
+      margin-top: 14px;
+      padding: 10px;
+      background: #1c1c1c;
+      border-radius: 6px;
+      border: 1px solid #2a2a2a;
     }
-    .status-ok { color: #4caf50; }
-    .status-err { color: #f44336; }
+    .diag-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #777;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .diag-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 4px 0;
+      border-bottom: 1px solid #262626;
+    }
+    .diag-item:last-child {
+      border-bottom: none;
+    }
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .dot-ok { background: #4caf50; box-shadow: 0 0 6px #4caf50; }
+    .dot-err { background: #f44336; box-shadow: 0 0 6px #f44336; }
+    .dot-warn { background: #ff9800; box-shadow: 0 0 6px #ff9800; }
+
+    .state-val {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    #reloadTabBtn {
+      display: none;
+      margin-top: 8px;
+      background: #e65100;
+      padding: 6px;
+      font-size: 11px;
+    }
+    #reloadTabBtn:hover {
+      background: #f57c00;
+    }
+
+    #statusMessage {
+      margin-top: 8px;
+      font-size: 11px;
+      text-align: center;
+      min-height: 14px;
+    }
   </style>
 </head>
 <body>
   <h2>🎬 Stan Sync</h2>
+  
   <label for="serverUrl">WebSocket Server URL</label>
   <input type="text" id="serverUrl" placeholder="ws://localhost:8080" />
   <button id="saveBtn">Connect / Save</button>
-  <div id="status"></div>
+  <div id="statusMessage"></div>
+
+  <!-- Real-time Diagnostics -->
+  <div class="diagnostics">
+    <div class="diag-title">Live Diagnostics</div>
+    
+    <div class="diag-item">
+      <span>Script Injected</span>
+      <span class="state-val" id="scriptStatus">
+        <span class="dot dot-warn"></span>Checking...
+      </span>
+    </div>
+
+    <div class="diag-item">
+      <span>Video Player</span>
+      <span class="state-val" id="videoStatus">
+        <span class="dot dot-warn"></span>Checking...
+      </span>
+    </div>
+
+    <div class="diag-item">
+      <span>Relay Socket</span>
+      <span class="state-val" id="socketStatus">
+        <span class="dot dot-warn"></span>Checking...
+      </span>
+    </div>
+
+    <button id="reloadTabBtn">⚠️ Tab Needs Refresh (Click to Reload)</button>
+  </div>
 
   <script src="popup.js"></script>
 </body>
 </html>
-

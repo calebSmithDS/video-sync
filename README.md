@@ -50,6 +50,10 @@ A lightweight, low-latency video synchronization system for **Stan** (and YouTub
 4. **Connect Your Friend**:
    - Send them the `wss://xxxx-xxxx.ngrok-free.app` URL.
    - They click the extension icon, paste that URL, and hit **Connect / Save**.
+   - **Check the Live Diagnostics card** in the popup:
+     - 🟢 **Script Injected**: `Active` (If it says `Not Injected`, click the orange **"⚠️ Tab Needs Refresh"** button).
+     - 🟢 **Video Player**: `Hooked` (Shows `Waiting...` until a video actually starts).
+     - 🟢 **Relay Socket**: `Connected`.
 
 5. **Stop the Session**:
    - Press `Ctrl + C` in your terminal. The tunnel and server close immediately.
