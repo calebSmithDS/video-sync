@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Stan Video Sync",
+  "version": "1.0.0",
+  "description": "Synchronize video playback on Stan with friends in real-time.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.stan.com.au/*",
+    "*://*.youtube.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Stan Video Sync"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.stan.com.au/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+

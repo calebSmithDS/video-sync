@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 280px;
+      padding: 16px;
+      margin: 0;
+      background: #141414;
+      color: #ffffff;
+    }
+    h2 {
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      color: #00a8e8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    label {
+      font-size: 12px;
+      color: #aaa;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      border-radius: 4px;
+      border: 1px solid #333;
+      background: #222;
+      color: #fff;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #00a8e8;
+    }
+    button {
+      width: 100%;
+      padding: 9px;
+      background: #00a8e8;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #0090c7;
+    }
+    #status {
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+      min-height: 18px;
+    }
+    .status-ok { color: #4caf50; }
+    .status-err { color: #f44336; }
+  </style>
+</head>
+<body>
+  <h2>🎬 Stan Sync</h2>
+  <label for="serverUrl">WebSocket Server URL</label>
+  <input type="text" id="serverUrl" placeholder="ws://localhost:8080" />
+  <button id="saveBtn">Connect / Save</button>
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+
